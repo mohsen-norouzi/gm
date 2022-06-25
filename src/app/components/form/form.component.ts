@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { Control } from 'src/app/models';
 
@@ -9,7 +10,7 @@ import { Control } from 'src/app/models';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  @Input() controls?: Control[];
+  @Input() controls?: Observable<Control[]>;
 
   constructor() { }
 

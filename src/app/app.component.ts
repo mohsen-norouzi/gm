@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Control } from './models';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,37 +10,11 @@ import { Control } from './models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  controls: Control[] = [
-    {
-      "field": "name",
-      "label": "Name",
-      "type": "text",
-      "hidden": "false",
-      "mandatory": true
-    },
-    {
-      "field": "email",
-      "label": "Email",
-      "type": "text",
-      "hidden": "false",
-      "mandatory": true
-    },
-    {
-      "field": "confirm",
-      "label": "Checkbox with confirmation",
-      "type": "check",
-      "hidden": "false"
-    },
-    {
-      "field": "hiddenField",
-      "label": "",
-      "type": "text",
-      "hidden": "true",
-      "mandatory": false
-    }
-  ]
+  controls$ = new Observable<Control[]>()
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-
+    this.controls$ = this.dataService.getControls();
   }
 }

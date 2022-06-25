@@ -1,5 +1,5 @@
 <form (ngSubmit)="onSubmit(mainForm)" #mainForm="ngForm">
-  <div *ngFor="let control of controls">
+  <div *ngFor="let control of controls | async">
     <mat-form-field appearance="outline" *ngIf="control.type === 'text'">
       <mat-label>{{ control.label }}</mat-label>
       <input

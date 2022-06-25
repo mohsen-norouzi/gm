@@ -1,1 +1,1 @@
-<app-form [controls]="controls"></app-form>
+<app-form [controls]="controls$" *ngIf="controls$ | async"></app-form>
