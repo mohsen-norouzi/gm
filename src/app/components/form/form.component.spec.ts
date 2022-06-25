@@ -46,4 +46,20 @@ describe('FormComponent', () => {
     fixture.detectChanges();
     expect(compiled.querySelector(`input[name='name']`)).toBeTruthy()
   });
+
+  it('should create a checkbox', () => {
+    fixture = TestBed.createComponent(FormComponent);
+    component = fixture.componentInstance;
+
+    component.controls = [{
+      "field": "confirm",
+      "label": "Checkbox with confirmation",
+      "type": "check",
+      "hidden": "false"
+    }]
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    fixture.detectChanges();
+    expect(compiled.querySelector(`input[type='checkbox']`)).toBeTruthy()
+  });
 });
