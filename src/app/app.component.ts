@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Control } from './models';
 import { DataService } from './services/data.service';
 
@@ -9,12 +8,17 @@ import { DataService } from './services/data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  controls$ = new Observable<Control[]>()
+export class AppComponent implements OnInit, OnDestroy {
+  controlSubscription = new Subscription();
+  controls: Control[] = []
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.controls$ = this.dataService.getControls();
+    this.controlSubscription = this.dataService.getControls().subscribe(data => this.controls = data);
+  }
+
+  ngOnDestroy(): void {
+    this.controlSubscription.unsubscribe();
   }
 }

@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormComponent } from './form.component';
 
@@ -16,6 +17,7 @@ describe('FormComponent', () => {
       declarations: [FormComponent],
       imports: [FormsModule,
         MatFormFieldModule,
+        BrowserAnimationsModule,
         MatButtonModule,
         MatInputModule,
         MatCheckboxModule]
@@ -42,8 +44,6 @@ describe('FormComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
-    expect(compiled.querySelector(`input[type='text']`)).toBeTruthy()
+    expect(compiled.querySelector(`input[name='name']`)).toBeTruthy()
   });
-
-
 });

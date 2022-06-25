@@ -1,25 +1,28 @@
-<form (ngSubmit)="onSubmit(mainForm)" #mainForm="ngForm">
-  <div *ngFor="let control of controls | async">
+<form (ngSubmit)="onSubmit(mainForm)" #mainForm="ngForm" class="flex flex-col">
+  <div *ngFor="let control of controls">
     <mat-form-field appearance="outline" *ngIf="control.type === 'text'">
       <mat-label>{{ control.label }}</mat-label>
       <input
-        [name]="control.field"
         matInput
+        [name]="control.field"
         [required]="!!control.mandatory"
         ngModel
       />
+      <!-- [hidden]="control.hidden" -->
     </mat-form-field>
 
     <mat-checkbox
       *ngIf="control.type === 'check'"
-      [checked]="true"
       [name]="control.field"
       [required]="!!control.mandatory"
       ngModel
     >
+      <!-- [hidden]="control.hidden" -->
       <mat-label>{{ control.label }}</mat-label>
     </mat-checkbox>
   </div>
 
-  <button type="submit" mat-flat-button color="accent">Submit</button>
+  <button type="submit" mat-flat-button color="accent" class="w-full" [disabled]="!mainForm.valid">
+    Submit
+  </button>
 </form>
